@@ -262,7 +262,7 @@ func (stub *ChaincodeStub) InvokeChaincode(chaincodeName string, args [][]byte) 
 	return handler.handleInvokeChaincode(chaincodeName, args, stub.TxID)
 }
 
-func (stub *ChaincodeStub) InvokeTransfer(chaincodeName string, args [][]byte, channel string) ([]byte, error) {
+func (stub *ChaincodeStub) InvokeTransfer(chaincodeName string, args [][]byte) ([]byte, error) {
 	// Internally we handle chaincode name as a composite name
 	args[0] = []byte("invoke_transfer_pov")
 	return handler.handleInvokeChaincode(chaincodeName, args, stub.TxID)

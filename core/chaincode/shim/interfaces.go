@@ -53,7 +53,7 @@ type ChaincodeStubInterface interface {
 	// same transaction context; that is, chaincode calling chaincode doesn't
 	// create a new transaction message.
 	InvokeChaincode(chaincodeName string, args [][]byte) ([]byte, error)
-	InvokeTransfer(chaincodeName string, args [][]byte, channel string) ([]byte, error)
+	InvokeTransfer(chaincodeName string, args [][]byte) ([]byte, error)
 	// QueryChaincode locally calls the specified chaincode `Query` using the
 	// same transaction context; that is, chaincode calling chaincode doesn't
 	// create a new transaction message.
