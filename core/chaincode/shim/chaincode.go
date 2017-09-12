@@ -262,6 +262,12 @@ func (stub *ChaincodeStub) InvokeChaincode(chaincodeName string, args [][]byte) 
 	return handler.handleInvokeChaincode(chaincodeName, args, stub.TxID)
 }
 
+func (stub *ChaincodeStub) InvokeTransfer(chaincodeName string, args [][]byte, channel string) pb.Response {
+	// Internally we handle chaincode name as a composite name
+	args[0] = []byte("invoke_transfer_pov")
+	return handler.handleInvokeChaincode(chaincodeName, args, stub.TxID)
+}
+
 // QueryChaincode locally calls the specified chaincode `Query` using the
 // same transaction context; that is, chaincode calling chaincode doesn't
 // create a new transaction message.
