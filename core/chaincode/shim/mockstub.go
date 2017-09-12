@@ -244,6 +244,17 @@ func (stub *MockStub) InvokeChaincode(chaincodeName string, args [][]byte) ([]by
 	return bytes, err
 }
 
+func (stub *MockStub) InvokeTransfer(chaincodeName string, args [][]byte) ([]byte, error) {
+	// TODO "args" here should possibly be a serialized pb.ChaincodeInput
+	function, params := getFuncArgs(args)
+	otherStub := stub.Invokables[chaincodeName]
+	mockLogger.Debug("MockStub", stub.Name, "Invoking peer chaincode", otherStub.Name, args)
+	//	function, strings := getFuncArgs(args)
+	bytes, err := otherStub.MockInvoke(stub.TxID, function, params)
+	mockLogger.Debug("MockStub", stub.Name, "Invoked peer chaincode", otherStub.Name, "got", bytes, err)
+	return bytes, err
+}
+
 func (stub *MockStub) QueryChaincode(chaincodeName string, args [][]byte) ([]byte, error) {
 	// TODO "args" here should possibly be a serialized pb.ChaincodeInput
 	mockLogger.Debug("MockStub", stub.Name, "Looking for peer chaincode", chaincodeName)
